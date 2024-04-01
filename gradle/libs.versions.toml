@@ -1,0 +1,27 @@
+[versions]
+app-plugin = "8.3.1"
+kotlin = "1.9.22"
+
+minSdk = "26"
+targetSdk = "34"
+compileSdk = "34"
+
+appcompat = "1.6.1"
+constraintlayout = "2.1.4"
+core-ktx = "1.12.0"
+material = "1.11.0"
+navigation-ktx = "2.7.7"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-ktx" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-ktx" }
+
+[plugins]
+androidApplication = { id = "com.android.application",  version.ref = "app-plugin"}
+kotlin = { id = "org.jetbrains.kotlin.android",  version.ref = "kotlin"}
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+library = { id = "com.android.library",  version.ref = "app-plugin"}
