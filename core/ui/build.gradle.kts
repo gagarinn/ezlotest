@@ -1,13 +1,11 @@
 plugins {
     alias(libs.plugins.library)
     alias(libs.plugins.kotlin)
-    alias(libs.plugins.dagger.hilt)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kapt)
 }
 
 android {
-    namespace = "net.ezlotest.domain"
+    namespace = "net.ezlotest.ui"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -26,13 +24,19 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    implementation(project(":core:domain"))
 
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.core.ktx)
+
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 }

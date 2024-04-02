@@ -18,7 +18,7 @@ class DeviceRepositoryImpl @Inject constructor(private val deviceDataStore: Devi
 
     override suspend fun fetchDevices(): Flow<NetworkStatus<List<Device>>> {
         val devicesResponse = deviceDataStore.fetchDevices()
-        val devices: List<Device> = devicesResponse.data.map()
+        val devices: List<Device> = devicesResponse.data.map().sortedBy { it.pkDevice }
         return flow {
             emit(NetworkStatus.Loading())
             when {

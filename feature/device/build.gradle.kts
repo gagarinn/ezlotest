@@ -25,12 +25,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
 
     implementation(project(":core:navigation"))
     implementation(project(":core:domain"))
+    implementation(project(":core:ui"))
 
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.navigation.ui.ktx)
@@ -40,4 +44,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.swiperefreshlayout)
 }

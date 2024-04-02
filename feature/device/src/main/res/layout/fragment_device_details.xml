@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="net.ezlotest.devicedetails.DeviceDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/device_details_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blue"
+            app:titleTextColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{model.screenTitle}"
+            tools:layout_height="50dp"
+            tools:text="Title"/>
+
+        <include
+            android:id="@+id/profile_view"
+            layout="@layout/layout_profile_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/device_details_toolbar"
+            bind:name="@{model.profileName}"
+            bind:avatar="@{model.profileAvatar}" />
+
+        <ImageView
+            android:id="@+id/device_image"
+            android:layout_width="@dimen/device_item_image_size"
+            android:layout_height="@dimen/device_item_image_size"
+            android:layout_marginTop="@dimen/material_spacing_m"
+            android:layout_marginStart="@dimen/material_spacing_m"
+            android:background="@drawable/bg_image_item"
+            android:srcRoundedCorners="@{model.icon}"
+            app:layout_constraintTop_toBottomOf="@+id/profile_view"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription"/>
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{model.deviceTitle}"
+            android:layout_margin="@dimen/material_spacing_s"
+            android:theme="@style/ItemTitleTheme"
+            app:layout_constraintStart_toEndOf="@+id/device_image"
+            app:layout_constraintTop_toTopOf="@+id/device_image"
+            app:layout_constraintBottom_toBottomOf="@+id/device_image"
+            tools:text="Title"/>
+
+        <TextView
+            android:id="@+id/serial_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_spacing_xxl"
+            android:layout_marginStart="@dimen/material_spacing_m"
+            android:text="@{@string/serial_number_label(model.serialNumber)}"
+            android:theme="@style/DeviceTextTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/device_image"
+            tools:text="Serial number"/>
+
+        <TextView
+            android:id="@+id/mac_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_spacing_xs"
+            android:layout_marginStart="@dimen/material_spacing_m"
+            android:text="@{@string/mac_address_label(model.macAddress)}"
+            android:theme="@style/DeviceTextTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serial_number"
+            tools:text="Mac Address"/>
+
+        <TextView
+            android:id="@+id/firmware"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_spacing_xxl"
+            android:layout_marginStart="@dimen/material_spacing_m"
+            android:text="@{@string/firmware_label(model.firmware)}"
+            android:theme="@style/DeviceTextTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mac_address"
+            tools:text="Firmware"/>
+
+        <TextView
+            android:id="@+id/model_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_spacing_xs"
+            android:layout_marginStart="@dimen/material_spacing_m"
+            android:text="@{@string/model_label(model.model)}"
+            android:theme="@style/DeviceTextTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firmware"
+            tools:text="Model"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

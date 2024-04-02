@@ -7,7 +7,17 @@
 
     <fragment
         android:id="@+id/device_list_fragment"
-        android:name="net.ezlotest.device.DeviceListFragment"
+        android:name="net.ezlotest.device.view.DeviceListFragment"
         tools:layout="@layout/fragment_device_list">
+
+        <action
+            android:id="@+id/action_device_list_to_details"
+            app:destination="@id/device_details_fragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/device_details_fragment"
+        android:name="net.ezlotest.devicedetails.DeviceDetailsFragment"
+        tools:layout="@layout/fragment_device_details"/>
+
 </navigation>
