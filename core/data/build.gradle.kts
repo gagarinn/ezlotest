@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.library)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
-    namespace = "net.ezlotest.navigation"
+    namespace = "net.ezlotest.data"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -27,7 +29,14 @@ android {
 
 dependencies {
 
-    implementation (libs.androidx.navigation.fragment.ktx)
-    implementation (libs.navigation.ui.ktx)
+    implementation(project(":core:domain"))
+
     implementation(libs.androidx.core.ktx)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+
+    // retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.logging.interceptor)
 }

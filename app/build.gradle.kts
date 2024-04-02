@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kapt)
 }
 
@@ -43,6 +44,8 @@ dependencies {
 
     implementation(project(":core:navigation"))
     implementation(project(":feature:device"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
 
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.navigation.ui.ktx)
@@ -50,4 +53,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 }

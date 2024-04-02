@@ -17,3 +17,5 @@ rootProject.name = "EzloTest"
 include(":app")
 include(":core:navigation")
 include(":feature:device")
+include(":core:domain")
+include(":core:data")
