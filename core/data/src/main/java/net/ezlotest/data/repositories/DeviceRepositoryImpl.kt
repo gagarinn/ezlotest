@@ -31,19 +31,13 @@ class DeviceRepositoryImpl @Inject constructor(
                     emit(NetworkStatus.Success(devices))
                 }
             }
-        }
-            .flowOn(Dispatchers.IO)
+        }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun getDevices(): Flow<NetworkStatus<List<Device>>> {
-        val dBDevices = databaseDeviceDataStore.getDevices()
-        return if (dBDevices.isNotEmpty()) {
-            flow {
-                emit(NetworkStatus.Success(dBDevices.map { it.toDomain() }))
-            }
-        } else {
-            fetchDevices()
-        }
+        return flow {
+            emit(NetworkStatus.Success(databaseDeviceDataStore.getDevices().map { it.toDomain() }))
+        }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun deleteDevice(pkDevice: String) {

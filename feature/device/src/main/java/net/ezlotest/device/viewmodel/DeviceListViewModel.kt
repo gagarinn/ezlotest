@@ -14,6 +14,7 @@ import net.ezlotest.device.DeviceItemType
 import net.ezlotest.device.events.DeviceEvent
 import net.ezlotest.domain.models.Device
 import net.ezlotest.domain.result.NetworkStatus
+import net.ezlotest.domain.usecases.DeleteDeviceUseCase
 import net.ezlotest.domain.usecases.FetchDevicesUseCase
 import net.ezlotest.domain.usecases.GetDevicesUseCase
 import net.ezlotest.domain.usecases.GetFakeProfileUseCase
@@ -25,6 +26,7 @@ import javax.inject.Inject
 class DeviceListViewModel @Inject constructor(
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesUseCase: GetDevicesUseCase,
+    private val deleteDeviceUseCase: DeleteDeviceUseCase,
     getFakeProfileUseCase: GetFakeProfileUseCase
 ) : ViewModel() {
 
@@ -51,11 +53,22 @@ class DeviceListViewModel @Inject constructor(
         }
     }
 
-    fun onRefresh() {
+    fun onResetClick(){
+        _devicesAction.tryEmit(DeviceEvent.OnResetClicked)
+    }
+
+    fun resetDevices() {
         viewModelScope.launch {
             fetchDevicesUseCase.invoke().collect { result ->
                 handleResult(result)
             }
+        }
+    }
+
+    fun deleteDevice(pkDevice: String) {
+        viewModelScope.launch {
+            deleteDeviceUseCase.invoke(pkDevice)
+            getDevices()
         }
     }
 

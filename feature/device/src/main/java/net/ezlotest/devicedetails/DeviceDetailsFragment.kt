@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import net.ezlotest.device.R
 import net.ezlotest.device.databinding.FragmentDeviceDetailsBinding
+import net.ezlotest.device.events.DeviceEvent
 import net.ezlotest.domain.models.Device
 import net.ezlotest.ui.Constants
 import net.ezlotest.ui.utils.parcelable
@@ -35,7 +39,20 @@ class DeviceDetailsFragment : Fragment() {
             model = viewModel
         }
         val device = requireArguments().parcelable<Device>(Constants.DEVICE_BUNDLE_KEY)
+        val isInEditMode = requireArguments().getBoolean(Constants.DEVICE_EDIT_BUNDLE_KEY)
 
-        viewModel.update(device)
+        viewModel.update(isInEditMode, device)
+        setUpViewModelActions()
+    }
+
+    private fun setUpViewModelActions() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.deviceDetailsAction.collect { event ->
+                when (event) {
+                    is DeviceEvent.OnDeviceUpdated,
+                    DeviceEvent.OnNavigateUp -> findNavController().navigateUp()
+                }
+            }
+        }
     }
 }

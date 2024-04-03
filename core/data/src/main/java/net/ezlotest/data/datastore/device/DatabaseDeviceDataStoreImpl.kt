@@ -6,7 +6,7 @@ import net.ezlotest.database.entities.DeviceEntity
 class DatabaseDeviceDataStoreImpl(private val deviceDao: DeviceDao) : DatabaseDeviceDataStore {
 
     override suspend fun saveDevices(devices: List<DeviceEntity>) {
-        deviceDao.insertDevices(devices)
+        deviceDao.saveDevices(devices)
     }
 
     override suspend fun update(entity: DeviceEntity) {

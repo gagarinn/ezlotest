@@ -6,4 +6,5 @@
     <color name="grey_light">#55000000</color>
     <color name="grey_extra_light">#11000000</color>
     <color name="blue">#FF0000FF</color>
+    <color name="red">#FFFF0000</color>
 </resources>

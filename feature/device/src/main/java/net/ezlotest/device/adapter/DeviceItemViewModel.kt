@@ -35,4 +35,17 @@ class DeviceItemViewModel(
             callback?.invoke(DeviceEvent.OnDeviceClicked(it))
         }
     }
+
+    fun onEditDeviceClick() {
+        entity?.let {
+            callback?.invoke(DeviceEvent.OnEditDeviceClicked(it))
+        }
+    }
+
+    fun onLongDeviceClick(): Boolean {
+        entity?.let {
+            callback?.invoke(DeviceEvent.OnLongDeviceClicked(it.pkDevice))
+        }
+        return true
+    }
 }

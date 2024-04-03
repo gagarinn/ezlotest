@@ -44,6 +44,4 @@ dependencies {
     implementation(libs.material)
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
-
-    implementation(libs.swiperefreshlayout)
 }

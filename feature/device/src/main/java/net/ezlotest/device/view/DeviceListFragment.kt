@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -65,15 +66,40 @@ class DeviceListFragment : Fragment() {
             deviceAdapter.callback = { event ->
                 when (event) {
                     is DeviceEvent.OnDeviceClicked -> navigateToDetails(event.device)
+                    is DeviceEvent.OnEditDeviceClicked -> navigateToEditDevice(event.device)
+                    is DeviceEvent.OnLongDeviceClicked -> showDeleteDeviceDialog(event.pkDevice)
                 }
             }
         }
     }
 
-    private fun navigateToDetails(device: Device?) {
-        val bundle = Bundle()
-        device?.let {
-            bundle.putParcelable(Constants.DEVICE_BUNDLE_KEY, it)
+    private fun navigateToEditDevice(device: Device) {
+        val bundle = Bundle().also {
+            it.putParcelable(Constants.DEVICE_BUNDLE_KEY, device)
+            it.putBoolean(Constants.DEVICE_EDIT_BUNDLE_KEY, true)
+        }
+        findNavController().navigate(R.id.action_device_list_to_details, bundle)
+    }
+
+    private fun showDeleteDeviceDialog(pkDevice: String) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder
+            .setMessage(getString(R.string.delete_device_message_dialog))
+            .setTitle(getString(R.string.delete_device_title_dialog))
+            .setPositiveButton(getString(R.string.ok)) { dialog, which ->
+                viewModel.deleteDevice(pkDevice)
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, which ->
+                Unit
+            }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun navigateToDetails(device: Device) {
+        val bundle = Bundle().also {
+            it.putParcelable(Constants.DEVICE_BUNDLE_KEY, device)
         }
         findNavController().navigate(R.id.action_device_list_to_details, bundle)
     }
@@ -82,13 +108,27 @@ class DeviceListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.devicesAction.collect { event ->
                 when (event) {
-                    is DeviceEvent.OnShowDevices -> {
-                        deviceAdapter.update(event.list)
-                        binding.deviceListSwipeRefresh.isRefreshing = false
-                    }
+                    is DeviceEvent.OnShowDevices -> deviceAdapter.update(event.list)
+                    DeviceEvent.OnResetClicked -> showResetDialog()
                 }
             }
         }
+    }
+
+    private fun showResetDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder
+            .setMessage(getString(R.string.reset_device_message_dialog))
+            .setTitle(getString(R.string.reset_device_title_dialog))
+            .setPositiveButton(getString(R.string.ok)) { dialog, which ->
+                viewModel.resetDevices()
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, which ->
+                Unit
+            }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun updateDevicesWithLifecycleScope() {

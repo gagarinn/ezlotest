@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:onClick="@{() -> model.onDeviceClick()}">
+        android:onClick="@{() -> model.onDeviceClick()}"
+        android:onLongClick="@{() -> model.onLongDeviceClick()}">
 
         <ImageView
             android:id="@+id/device_image"
@@ -29,14 +30,27 @@
             tools:ignore="ContentDescription"/>
 
         <ImageView
+            android:id="@+id/edit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_edit"
+            android:paddingHorizontal="@dimen/material_spacing_s"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chevron_image"
+            android:onClick="@{() -> model.onEditDeviceClick()}"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
             android:id="@+id/chevron_image"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:src="@drawable/ic_arrow_forward"
             android:layout_marginEnd="@dimen/material_spacing_m"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> model.onEditDeviceClick()}"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -46,7 +60,7 @@
             android:text="@{model.title}"
             android:layout_margin="@dimen/material_spacing_s"
             android:theme="@style/ItemTitleTheme"
-            app:layout_constraintEnd_toStartOf="@+id/chevron_image"
+            app:layout_constraintEnd_toStartOf="@+id/edit_image"
             app:layout_constraintStart_toEndOf="@+id/device_image"
             app:layout_constraintTop_toTopOf="@+id/device_image"
             tools:text="Title"/>

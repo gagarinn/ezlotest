@@ -16,18 +16,33 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/device_details_toolbar"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue"
             app:titleTextColor="@color/white"
+            app:title="@{model.screenTitle}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{model.screenTitle}"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationOnClickListener="@{() -> model.onNavigateUpClick()}"
             tools:layout_height="50dp"
-            tools:text="Title"/>
+            tools:text="Title">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:onClick="@{() -> model.onSaveClicked()}"
+                android:isVisible="@{model.isChanged()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <include
             android:id="@+id/profile_view"
@@ -53,13 +68,15 @@
             tools:ignore="ContentDescription"/>
 
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_spacing_s"
+            android:onTextChanged="@{(text, start, before, count) -> model.onTextChanged(text)}"
             android:text="@{model.deviceTitle}"
-            android:layout_margin="@dimen/material_spacing_s"
             android:theme="@style/ItemTitleTheme"
+            android:enabled="@{model.inEditMode}"
             app:layout_constraintStart_toEndOf="@+id/device_image"
             app:layout_constraintTop_toTopOf="@+id/device_image"
             app:layout_constraintBottom_toBottomOf="@+id/device_image"
