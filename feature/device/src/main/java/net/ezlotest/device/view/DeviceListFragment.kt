@@ -19,7 +19,7 @@ import net.ezlotest.device.adapter.DeviceAdapter
 import net.ezlotest.device.databinding.FragmentDeviceListBinding
 import net.ezlotest.device.events.DeviceEvent
 import net.ezlotest.device.viewmodel.DeviceListViewModel
-import net.ezlotest.domain.entities.Device
+import net.ezlotest.domain.models.Device
 import net.ezlotest.ui.Constants
 import javax.inject.Inject
 

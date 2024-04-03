@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import net.ezlotest.device.DeviceItem
 import net.ezlotest.device.DeviceItemType
 import net.ezlotest.device.events.DeviceEvent
-import net.ezlotest.domain.entities.Device
+import net.ezlotest.domain.models.Device
 import net.ezlotest.domain.result.NetworkStatus
 import net.ezlotest.domain.usecases.FetchDevicesUseCase
 import net.ezlotest.domain.usecases.GetDevicesUseCase

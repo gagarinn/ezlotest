@@ -1,4 +1,4 @@
-package net.ezlotest.domain.entities
+package net.ezlotest.domain.models
 
 data class DeviceResponse(
     val PK_Device: String,

@@ -1,4 +1,4 @@
-package net.ezlotest.domain.entities
+package net.ezlotest.domain.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

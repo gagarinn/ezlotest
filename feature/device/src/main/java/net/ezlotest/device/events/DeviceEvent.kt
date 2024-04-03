@@ -1,7 +1,7 @@
 package net.ezlotest.device.events
 
 import net.ezlotest.device.DeviceItem
-import net.ezlotest.domain.entities.Device
+import net.ezlotest.domain.models.Device
 import net.ezlotest.ui.SingleEvent
 
 sealed class DeviceEvent : SingleEvent {

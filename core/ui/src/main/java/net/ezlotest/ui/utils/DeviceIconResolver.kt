@@ -1,6 +1,6 @@
 package net.ezlotest.ui.utils
 
-import net.ezlotest.domain.entities.Device
+import net.ezlotest.domain.models.Device
 import net.ezlotest.ui.R
 
 private const val SERCOMM_G450 = "Sercomm G450"

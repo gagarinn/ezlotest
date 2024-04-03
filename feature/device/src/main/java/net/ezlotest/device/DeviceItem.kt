@@ -1,7 +1,7 @@
 package net.ezlotest.device
 
-import net.ezlotest.domain.entities.Device
-import net.ezlotest.domain.entities.Profile
+import net.ezlotest.domain.models.Device
+import net.ezlotest.domain.models.Profile
 
 data class DeviceItem(
     val type: DeviceItemType,

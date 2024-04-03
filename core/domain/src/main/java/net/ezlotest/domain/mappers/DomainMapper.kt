@@ -1,8 +1,8 @@
 package net.ezlotest.domain.mappers
 
-import net.ezlotest.domain.entities.Device
-import net.ezlotest.domain.entities.DeviceResponse
-import net.ezlotest.domain.entities.DevicesResponse
+import net.ezlotest.domain.models.Device
+import net.ezlotest.domain.models.DeviceResponse
+import net.ezlotest.domain.models.DevicesResponse
 
 fun DevicesResponse?.map(): List<Device> {
     this?.let { devicesResponse ->

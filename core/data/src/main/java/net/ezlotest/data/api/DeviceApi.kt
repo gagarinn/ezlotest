@@ -1,6 +1,6 @@
 package net.ezlotest.data.api
 
-import net.ezlotest.domain.entities.DevicesResponse
+import net.ezlotest.domain.models.DevicesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

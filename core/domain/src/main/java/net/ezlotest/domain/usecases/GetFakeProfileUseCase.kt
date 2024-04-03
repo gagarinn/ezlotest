@@ -1,6 +1,6 @@
 package net.ezlotest.domain.usecases
 
-import net.ezlotest.domain.entities.Profile
+import net.ezlotest.domain.models.Profile
 import javax.inject.Inject
 
 class GetFakeProfileUseCase @Inject constructor() {

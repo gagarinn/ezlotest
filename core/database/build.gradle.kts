@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "net.ezlotest.data"
+    namespace = "net.ezlotest.database"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -30,14 +30,12 @@ android {
 dependencies {
 
     implementation(project(":core:domain"))
-    implementation(project(":core:database"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
 
-    // retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
-    implementation(libs.logging.interceptor)
+    kapt(libs.room.compiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
 }

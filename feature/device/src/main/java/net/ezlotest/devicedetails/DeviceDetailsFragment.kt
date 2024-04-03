@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.ezlotest.device.R
 import net.ezlotest.device.databinding.FragmentDeviceDetailsBinding
-import net.ezlotest.domain.entities.Device
+import net.ezlotest.domain.models.Device
 import net.ezlotest.ui.Constants
 import net.ezlotest.ui.utils.parcelable
 
